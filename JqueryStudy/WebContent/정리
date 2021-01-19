@@ -1,0 +1,92 @@
+< chap01_01jquery.html>
+1) <script src="../../js/jquery-3.3.1.min.js"></script> 써서 제이쿼리를 잡아준다.
+
+2) 본문 script는 <script></script>안에다가 넣어준다.
+
+3) 제이쿼리에서 객체 즉, 태그를 잡을때에는 $ 기호를 사용한다.
+
+4) 태그안에 값을 넣어줄때 : $("span").html("hi");
+      태그안에 값을 읽어롤때 : $("span").text();
+      태그안에 아이디값 지정 : $("#아이디이름");
+      태그안에 클래스값 지정 : $(".클래스이름");
+
+< chap02_01bind.html >
+1) bind는 보통 객체와 함수이벤트를 연결할 때 사용한다.
+ex. $(".bold").bind("click", function() {
+		현재 이벤트가 발생된 객체 : this를 표현 => $(this)
+	});
+	- 다른 버전
+	$(".bold").click(function() {
+		
+	});
+
+< chap02_02bind.each.html >
+1) each와 forEach의 차이점 (each는 제이쿼리에서만 사용 가능!)
+= each는 선택자가 왔을때에 사용 가능하고 foreach는 (배열, 객체배열 등) 사용 가능하다.
+
+< chap03_show_hide_val / 01val_show_hide.html>
+1) $(".ok").show(); => 특정 객체를 보여주도록 하는 메소드
+2) $(".no").hide(); => 특정 객체를 숨기게 하는 메소드
+3) $("#answer").val(); => input값의 value를 가져오는 메소드
+
+< / 02each_radio_checked.html>
+1) 라디오 버튼을 잡을 때! -> name 속성을 이용한다. (체크박스도 동일 : radio->checkbox)
+: 제이쿼리에서 name값을 잡을때 : $("input:radio[name=asnwer]");의 반환값은 배열이 된다.
+  = 보통 $("input:radio[name=asnwer]")는 객체이므로 each 사용
+  = $("input:radio[name=asnwer]").each(function(index, item){});
+  = 중요 !!! each문에서 index와 item위치는 저렇게 고정되어 있음 !!!
+
+2) 제이쿼리에서 라디오 또는 체크박스를 선택했는지 안했는지 알아오는 2가지 방법
+	1. $(라디오 또는 체크박스의 선택자).prop("checked") 
+	==> 선택을 했으면 true, 선택을 안했으면 false
+	    	             
+	2. $(라디오 또는 체크박스의 선택자).is(":checked")   
+	==> 선택을 했으면 true, 선택을 안했으면 false
+
+3) html 태그 안에 넣어주는 보안을 위한 소스 
+	=== >>> 소스보기 금지 <<< === 
+    oncontextmenu="return false" : 마우스 오른쪽 메뉴 금지
+    ondragstart="return false"   : 드래그 금지
+    onselectstart="return false" : 선택복사 금지
+
+<chap04_unbind_random / 01event.target_unbind.html>
+1) $(".buttons").bind("click", function() {
+	var $target = $(event.target);
+	= 여기서 target 앞에 달러는 표시안해도 되지만, 일반적으로 표시된다.
+	= target 변수안에는 현재 이벤트가 발생된 객체를 의미한다.
+	});
+2) 엘리먼트와 엘리먼트가 같은지 다른지 비교할때에는 is를 사용한다.
+   = 선택자1.is(선택자2)가 동일한 엘리먼트를 가리키면 -> true
+                                              동일한 엘리먼트를 가리키지 않으면 -> false
+3) unbind();
+= 클릭이벤트를 발생시킬때 bind()를 사용하는데 한번만 클릭하고 이벤트를 발생하지 않도록 할때
+  unbind()를 사용하면 된다.
+  
+</02event.target_empty_random.html>
+1) empty() 
+= 선택자.empty()는 선택자 안에 들어 있는 내용물을 모두 비워준다.
+2) random() 
+ex. 1~5중 하나를 랜덤하게 나오게 하기 위해서는 
+Math.floor(Math.random() * (max-min+1)) + min; 
+
+
+<chap05_mouseover_mouseout_hover> / 01mouseover_mouseout_attr_prop.html
+1) mouseover : 마우스가 올라가면 이벤트 발생
+   mouseout : 마우스가 내려가면 이벤트 발생
+   
+2) 선택자의 class, id, name 값 알아오기
+= 선택자.attr('class명'); 또는 선택자.prop('class명');
+= 선택자.attr('id명'); 또는 선택자.prop('id명');
+= 선택자.attr('name명'); 또는 선택자.prop('name명');
+
+3) 선택자.trigger(event 종류);
+= 보통 첫화면에 어떠한 버튼이 클릭되어진 상태로 나타나게 해주는 것을 의미
+= 문서가 로드되어진 다음에는 자동으로 선택자에 event 종류가 동작하도록 실행하는 것이다. 
+= 선택자.eq(index값); 은 선택자에서 index값에 해당하는 요소를 얻어오는 것이다.
+  
+4) 04hover.html
+= hover은 mouseover과 mouseout을 합친것을 의미
+= hover은 bind()를 사용하지 않는다.
+= 선택자.hover(function() {}, function() {});
+    첫번째 함수는 mouseover에 해당하는 내용이고
+    두번째 함수는 mouseout에 해당하는 내용이다.

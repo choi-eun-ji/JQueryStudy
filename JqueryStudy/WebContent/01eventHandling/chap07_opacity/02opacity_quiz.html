@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>마우스를 움직여 연예인 사진을 발게 또는 흐리게 처리하기(opacity)</title>
+<!-- 
+   맨처음에는 버튼3개(김태희, 아이유, 박보영)는 희미하게 보이고,
+   사진은 아예 안보인다.
+   
+   특정 버튼에 마우스가 올라가면 그 버튼만 원래광도로 띄면서 내용은 클릭하세요로 변경된다.
+   그리고 동시에 버튼아래에 그 사람의 사진만 희미하게 보인다.
+   
+   특정버튼을 클릭하면 그 사람의 큰사진이 원래광도로 띈다.
+   그리고 동시에 그 사람의 사진아래에 프로필 약력이 보이도록 한다. 
+-->
+<style type="text/css">
+
+   div#container {
+         width: 80%;
+         margin: 0 auto;
+      /* border: 1px solid red; */
+   }
+   
+   img {margin: 20px;}
+
+   .buttons {
+   		margin: 20px;
+   		width: 90px;
+   		height: 35px;
+   		background-color: #ffcccc;
+   		color:#ffffcc;
+   		border: solid 1px #ffffcc;
+   		font-size: 10pt; 
+   		outline: 0;
+   }
+   #uls {
+   	list-style-type: none;
+   	margin-left: 550px;
+   }
+   #uls li {
+   		text-align: left;
+   }
+   img.largeimg {
+   	border-radius: 20%;
+   }
+</style>
+
+<script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+	   var arrPerson = [{name:"김태희", filename:"kimth.jpg", filename2:"kimthLarge.jpg", address:"서울 강동구", email:"kimth@gmail.com"}
+       ,{name:"아이유", filename:"iyou.jpg", filename2:"iyouLarge.jpg", address:"서울 강서구", email:"iyou@gmail.com"}
+       ,{name:"박보영", filename:"parkby.jpg", filename2:"parkbyLarge.jpg", address:"서울 강남구", email:"parkby@gmail.com"}];
+       
+	   var html ="";
+	   arrPerson.forEach(function(item,index) {
+		   html += "<button class='buttons'>"+item.name+"</button>"
+	   });
+	   
+	   $("div#firstdiv").html(html);
+	   
+	   $("button.buttons").hover(function(){
+		   $target = $(event.target);
+		   $target.text("클릭하세요");
+		   $target.css({'background-color':'navy','color':'white','border':'solid 2px #ffcc00','border-radius':'50%'});
+		   var html = "<img src='images/"+arrPerson[$target.index()].filename+"'/>";
+		   $("div#face").html(html).css('opacity','0.2');
+	   }, function() {
+		   $("button.buttons").css({'background-color':'#ffcccc', 'color':'#ffffcc','border':'solid 1px #ffffcc','border-radius':'0%'});
+		   var text="";
+		   text = arrPerson[$target.index()].name;
+		   $target.text(text);
+		   
+		   // var html ="";
+		   // $("div#face").html(html);
+		   // 위의 두 문장과 같은 명령문
+		   $("div#face").empty();
+	   });
+	   
+	   $("button.buttons").click(function() {
+		   $target = $(event.target);
+		   var texts = arrPerson[$target.index()].name;
+		   $target.text(texts);
+		   var html = "<img src='images/"+arrPerson[$target.index()].filename2+"' class='largeimg'/>";
+		   var text = "<ul id='uls'><li>이름:&nbsp&nbsp&nbsp"+arrPerson[$target.index()].name+"</li>"
+		   			     +"<li>주소:&nbsp&nbsp&nbsp"+arrPerson[$target.index()].address+"</li>"
+		   			     +"<li>e메일:&nbsp&nbsp&nbsp"+arrPerson[$target.index()].email+"</li></ul>";
+		   html += text;
+		   $("div#face").html(html).css({'opacity':'1.0'});
+		   
+	   });
+	
+	  
+	   
+   }); // end of $(document).ready(function(){});--------------
+</script>
+</head>
+<body>
+  <div id="container" align="center">
+      <div id="firstdiv"></div>
+      <div id="face" style="margin-top: 50px;">
+ 	  </div>	
+  </div>
+</body>
+</html>

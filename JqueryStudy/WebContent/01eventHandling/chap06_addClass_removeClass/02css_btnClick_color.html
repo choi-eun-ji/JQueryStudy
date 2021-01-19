@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+div#container {
+      /* border: solid 1px gray; */
+      
+      width: 90%;
+      margin: 0 auto;
+      padding: 2%;
+   }
+
+   span#notice {
+      font-size: 20pt; 
+      background-color: navy; 
+      color: white; 
+      margin-right: 60px;
+   }
+
+   button.btns {
+      margin-right: 20px;
+      width: 100px;
+      height: 50px;
+      font-size: 20pt;
+   }
+
+   div.answer {
+      display: inline-block;
+   }
+
+   div#hangulDiv {
+      font-size: 60pt;
+   }
+   
+   #colorDiv {
+   	width:200px;
+   	height: 200px;
+   	border: solid 1px gray;
+   }
+</style>
+</head>
+
+<body>
+ <div id="container">
+      <div id="btnsDiv"></div>
+       <div id="colorDiv" class="answer"></div>
+       <div id="hangulDiv" class="answer"></div>
+   </div>
+</body>
+
+<script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var arrBtn = [{color:"red", hangle:"빨강"}
+		   		,{color:"orange", hangle:"오렌지"}
+		   		,{color:"yellow", hangle:"노랑"}
+		   		,{color:"green", hangle:"초록"}
+		   		,{color:"blue", hangle:"파랑"}
+		   		,{color:"navy", hangle:"남색"}
+		   		,{color:"purple", hangle:"보라"}];
+	
+	var html = "<span id='notice'>버튼을 눌러보세요</span>";
+	
+	arrBtn.forEach(function(item){
+		html += "<button type='button'>"+item.color+"</button>";
+	});
+	
+	$("div#btnsDiv").html(html);
+	
+	$("button").bind("click", function(event) {
+		var $target = $(event.target);
+		
+		/*
+			// 지금 일어난 이벤트가 몇번째 인덱스 인지 html태그의 인덱스를 반환해 준다.
+			console.log("$target.index() > " + $target.index());
+			// 선택한 선택자($('.button'))중 지금 발생한 이벤트의 인덱스 번호를 반환해준다.
+            console.log("$('.button').index($target) > " + $('.button').index($(this)));  
+		*/
+		var index = $("button").index($target);
+		//var index = $target.index();
+		
+		
+		$("div#colorDiv").css({'background-color':$target.text()})
+		$("div#hangulDiv").css({'color':$target.text()})
+		$("div#hangulDiv").html(arrBtn[index].hangle);
+	});
+
+	 $("button").eq(0).trigger("click");
+
+});
+</script>
+</html>

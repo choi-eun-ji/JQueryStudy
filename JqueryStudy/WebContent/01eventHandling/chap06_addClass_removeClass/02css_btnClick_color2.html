@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+span#text {
+	background-color: navy;
+	color: white;
+	font-size: 13pt;
+}
+
+span#buttons {
+	margin-left: 30px;
+}
+
+span#buttons > button {
+	width: 80px;
+	height: 30px;
+	font-size: 14pt;
+	border: solid 1px #d9d9d9;
+}
+
+span#color {
+	display: inline-block;
+	width: 130px;
+	height: 130px;
+}
+
+div#container {
+	margin: 30px;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+	<div>
+		<span id="text">버튼을 눌러보세요</span>
+		<span id="buttons">
+			<button value="빨강">red</button>
+			<button value="오렌지">orange</button>
+			<button value="노랑">yellow</button>
+			<button value="초록">green</button>
+			<button value="파랑">blue</button>
+			<button value="남색">navy</button>
+			<button value="보라">purple</button>
+		</span>
+	</div>
+	<div>
+		<span id="color"></span>
+		<span id="name"></span>
+	</div>
+</div>
+</body>
+
+<script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$("span#buttons button").bind("click", function() {
+		 var $target = $(event.target);
+		 var text = $target.text();
+		 
+		 $("span#color").css({'background-color':text});
+		 
+		 $("span#name").text($target.val());
+		 $("span#name").css({'color':text,'font-size':'40pt'});
+		 
+	});
+	
+</script>
+</html>
